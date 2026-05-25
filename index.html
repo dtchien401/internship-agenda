@@ -1,539 +1,974 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Commercial Master Summary Dashboard 2026</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: #f8fafc;
-    }
-
-    .card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 20px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      white-space: nowrap;
-    }
-
-    .status-live { background: #dcfce7; color: #15803d; }
-    .status-uat { background: #dbeafe; color: #1d4ed8; }
-    .status-build { background: #fef3c7; color: #b45309; }
-    .status-risk { background: #fee2e2; color: #b91c1c; }
-    .status-wait { background: #f1f5f9; color: #475569; }
-
-    .progress-track {
-      width: 100%;
-      height: 8px;
-      background: #e2e8f0;
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      border-radius: 999px;
-      background: #dc2626;
-    }
-
-    .nav-link {
-      display: flex;
-      align-items: center;
-      padding: 12px 14px;
-      color: #94a3b8;
-      border-radius: 14px;
-      font-size: 14px;
-      font-weight: 700;
-      transition: all 0.2s;
-    }
-
-    .nav-link:hover {
-      color: #ffffff;
-      background: #1e293b;
-    }
-
-    .active-nav {
-      background: #dc2626;
-      color: white;
-    }
-
-    .table-row {
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .table-row:last-child {
-      border-bottom: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>California Fitness & Yoga - 3-Week Internship Agenda</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        caliRed: '#E11B22',
+                        caliDark: '#111111',
+                        caliGray: '#1F1F1F',
+                        caliLightGray: '#F5F5F7',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        .tab-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card {
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(12px);
+            border:1px solid rgba(226,232,240,1);
+        }
+    </style>
 </head>
+<body class="bg-white text-slate-800 font-sans min-h-screen selection:bg-caliRed selection:text-slate-900">
 
-<body class="text-slate-800">
-
-<div class="flex min-h-screen">
-
-  <!-- SIDEBAR -->
-  <aside class="w-72 bg-slate-950 text-white p-6 hidden lg:block sticky top-0 h-screen">
-    <div class="mb-10">
-      <div class="flex items-center gap-2 text-red-500 mb-2">
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
-        </svg>
-        <span class="text-2xl font-black tracking-tighter text-white">CALIFORNIA</span>
-      </div>
-      <p class="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">
-        Commercial Summary Dashboard
-      </p>
-    </div>
-
-    <nav class="space-y-2">
-      <a href="#executive" class="nav-link active-nav">Executive View</a>
-      <a href="#summary" class="nav-link">BOD Summary</a>
-      <a href="#outcomes" class="nav-link">Outcome Focus</a>
-      <a href="#phase2" class="nav-link">Phase 2 Execution</a>
-      <a href="#risks" class="nav-link">Risks & Decisions</a>
-      <a href="#next" class="nav-link">Next 30 Days</a>
-    </nav>
-
-    <div class="absolute bottom-6 left-6 right-6">
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
-        <p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Dashboard Use</p>
-        <p class="text-xs text-slate-300 leading-relaxed">
-          BOD-level view focused on outcomes, business impact, risks and decisions.
-        </p>
-      </div>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="flex-1 p-4 lg:p-10 overflow-x-hidden">
-
-    <!-- HEADER -->
-    <header id="executive" class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-      <div>
-        <p class="text-red-600 font-extrabold text-xs uppercase tracking-[0.25em] mb-2">BOD View</p>
-        <h1 class="text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight">
-          Commercial Master Roadmap 2026
-        </h1>
-        <p class="text-slate-500 mt-2 font-medium">
-          Outcome-based summary of commercial priorities, business impact, execution risks and required decisions.
-        </p>
-      </div>
-
-      <div class="card px-5 py-3">
-        <span class="block text-[10px] uppercase font-bold text-slate-400">Reporting Date</span>
-        <span class="text-red-600 font-extrabold text-lg">April 28, 2026</span>
-      </div>
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 bg-white/95 border-b border-slate-200 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="flex items-center shrink-0">
+                    <img src="./logo.png" alt="California Fitness & Yoga Logo" class="h-10 sm:h-12 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+                    <span style="display:none" class="bg-caliRed text-white px-3 py-2 rounded font-extrabold tracking-wider text-xl">CALI</span>
+                </div>
+                <div class="hidden sm:block">
+                    <span class="text-xs uppercase tracking-widest text-slate-500 block font-semibold">
+                        <span class="lang-vi">Kỳ Thực Tập 3 Tuần</span>
+                        <span class="lang-en hidden">3-Week Internship</span>
+                    </span>
+                    <span class="text-sm font-bold text-slate-900 block">
+                        <span class="lang-vi">CHƯƠNG TRÌNH MARKETING THỰC CHIẾN</span>
+                        <span class="lang-en hidden">PRACTICAL MARKETING PROGRAM</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <!-- Date Badge -->
+                <span class="text-xs sm:text-sm bg-white/10 px-3 py-1.5 rounded-full text-slate-600 font-medium flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="lang-vi">Bắt đầu: 01/06/2026</span>
+                    <span class="lang-en hidden">Starts: 01/06/2026</span>
+                </span>
+                
+                <!-- Language Toggle Switcher -->
+                <div class="flex items-center bg-white p-1 rounded-lg border border-slate-200">
+                    <button id="btn-lang-vi" onclick="setLanguage('vi')" class="px-2 py-1 rounded bg-caliRed text-white font-bold text-xs transition-all">
+                        VI
+                    </button>
+                    <button id="btn-lang-en" onclick="setLanguage('en')" class="px-2 py-1 rounded text-slate-500 font-bold text-xs hover:text-slate-900 transition-all">
+                        EN
+                    </button>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <!-- KPI CARDS -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
-      <div class="card p-5">
-        <p class="text-xs font-extrabold uppercase text-slate-400 mb-2">Strategic Workstreams</p>
-        <div class="flex items-end justify-between">
-          <h2 class="text-4xl font-black text-slate-950">8</h2>
-          <span class="badge status-build">Active</span>
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden pt-12 pb-8 bg-gradient-to-b from-caliRed/10 via-white to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="px-3 py-1 text-xs font-semibold tracking-widest text-caliRed uppercase bg-caliRed/10 rounded-full inline-block mb-4">
+                    <span class="lang-vi">Phát Triển Tư Duy Người Trong Cuộc</span>
+                    <span class="lang-en hidden">Developing an Insider Mindset</span>
+                </span>
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">
+                    <span class="lang-vi">AGENDA THỰC TẬP <span class="text-transparent bg-clip-text bg-gradient-to-r from-caliRed to-orange-500">MARKETING</span></span>
+                    <span class="lang-en hidden"><span class="text-transparent bg-clip-text bg-gradient-to-r from-caliRed to-orange-500">MARKETING</span> INTERNSHIP AGENDA</span>
+                </h1>
+                <p class="text-base sm:text-lg text-slate-500">
+                    <span class="lang-vi">Trải nghiệm thực chiến từ góc nhìn "Insider", thấu hiểu vận hành, đối mặt thử thách ngành Fitness và tạo ra những chiến dịch truyền thông thay đổi hành vi hội viên.</span>
+                    <span class="lang-en hidden">Hands-on experience from an "Insider" perspective, understanding operations, facing fitness industry challenges, and creating communication campaigns to change member behavior.</span>
+                </p>
+            </div>
         </div>
-        <p class="text-xs text-slate-500 mt-3">Grouped by revenue, retention, digital platform and execution control.</p>
-      </div>
-
-      <div class="card p-5">
-        <p class="text-xs font-extrabold uppercase text-slate-400 mb-2">Immediate Outcome</p>
-        <div class="flex items-end justify-between">
-          <h2 class="text-4xl font-black text-emerald-600">Cash</h2>
-          <span class="badge status-live">Priority</span>
-        </div>
-        <p class="text-xs text-slate-500 mt-3">Protect cash recovery through service call, PT reactivation and payment flow.</p>
-      </div>
-
-      <div class="card p-5">
-        <p class="text-xs font-extrabold uppercase text-slate-400 mb-2">Medium-Term Outcome</p>
-        <div class="flex items-end justify-between">
-          <h2 class="text-4xl font-black text-blue-600">LTV</h2>
-          <span class="badge status-uat">Build</span>
-        </div>
-        <p class="text-xs text-slate-500 mt-3">Increase member value through loyalty, ecosystem usage and PT penetration.</p>
-      </div>
-
-      <div class="card p-5">
-        <p class="text-xs font-extrabold uppercase text-slate-400 mb-2">BOD Attention</p>
-        <div class="flex items-end justify-between">
-          <h2 class="text-4xl font-black text-amber-600">IT</h2>
-          <span class="badge status-risk">Critical</span>
-        </div>
-        <p class="text-xs text-slate-500 mt-3">Most outcomes depend on IT timeline, bug closure and UAT sign-off.</p>
-      </div>
     </section>
 
-    <!-- EXECUTIVE SUMMARY -->
-    <section class="card p-6 lg:p-8 mb-8">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
+    <!-- Main Content & Tabs -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+        
+        <!-- Key Metrics / Objectives Header -->
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-10">
+            <div class="bg-white p-4 rounded-xl border border-slate-100 flex flex-col justify-between">
+                <div class="text-caliRed mb-2"><i data-lucide="eye" class="w-5 h-5"></i></div>
+                <div>
+                    <h4 class="text-xs text-slate-500 font-semibold uppercase">
+                        <span class="lang-vi">Tầm Nhìn</span>
+                        <span class="lang-en hidden">Vision</span>
+                    </h4>
+                    <p class="text-sm font-bold mt-1">Insider Perspective</p>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-100 flex flex-col justify-between">
+                <div class="text-caliRed mb-2"><i data-lucide="zap" class="w-5 h-5"></i></div>
+                <div>
+                    <h4 class="text-xs text-slate-500 font-semibold uppercase">
+                        <span class="lang-vi">Trải Nghiệm</span>
+                        <span class="lang-en hidden">Experience</span>
+                    </h4>
+                    <p class="text-sm font-bold mt-1">
+                        <span class="lang-vi">Marketing Thực Chiến</span>
+                        <span class="lang-en hidden">Practical Marketing</span>
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-100 flex flex-col justify-between">
+                <div class="text-caliRed mb-2"><i data-lucide="target" class="w-5 h-5"></i></div>
+                <div>
+                    <h4 class="text-xs text-slate-500 font-semibold uppercase">
+                        <span class="lang-vi">Mục Tiêu</span>
+                        <span class="lang-en hidden">Goal</span>
+                    </h4>
+                    <p class="text-sm font-bold mt-1">
+                        <span class="lang-vi">Thấu Hiểu Chiến Dịch</span>
+                        <span class="lang-en hidden">Campaign Strategy</span>
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-100 flex flex-col justify-between">
+                <div class="text-caliRed mb-2"><i data-lucide="alert-triangle" class="w-5 h-5"></i></div>
+                <div>
+                    <h4 class="text-xs text-slate-500 font-semibold uppercase">
+                        <span class="lang-vi">Thách Thức</span>
+                        <span class="lang-en hidden">Challenges</span>
+                    </h4>
+                    <p class="text-sm font-bold mt-1">
+                        <span class="lang-vi">Nỗi Đau Ngành Fitness</span>
+                        <span class="lang-en hidden">Fitness Pain Points</span>
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-100 col-span-2 md:col-span-1 flex flex-col justify-between">
+                <div class="text-caliRed mb-2"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                <div>
+                    <h4 class="text-xs text-slate-500 font-semibold uppercase">
+                        <span class="lang-vi">Bài Học</span>
+                        <span class="lang-en hidden">Lessons</span>
+                    </h4>
+                    <p class="text-sm font-bold mt-1">5 Hard-Earned Lessons</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Switcher -->
+        <div class="flex p-1 bg-white rounded-xl max-w-md mx-auto mb-8 border border-slate-100">
+            <button onclick="switchTab(1)" id="tab-btn-1" class="flex-1 py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-900 bg-caliRed">
+                WEEK 1
+            </button>
+            <button onclick="switchTab(2)" id="tab-btn-2" class="flex-1 py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-500 hover:text-slate-900">
+                WEEK 2
+            </button>
+            <button onclick="switchTab(3)" id="tab-btn-3" class="flex-1 py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-500 hover:text-slate-900">
+                WEEK 3
+            </button>
+        </div>
+
+        <!-- Weekly Content Panels -->
         <div>
-          <h2 class="text-2xl font-extrabold text-slate-950">Executive Summary</h2>
-          <p class="text-sm text-slate-500 mt-1">The roadmap is being simplified into three commercial outcomes for BOD tracking.</p>
-        </div>
-        <span class="badge status-build">Overall Status: Execution Build</span>
-      </div>
+            <!-- WEEK 1 PANEL -->
+            <div id="panel-1" class="space-y-8">
+                <div class="glass-card p-6 sm:p-8 rounded-2xl">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-6 border-b border-slate-200">
+                        <div>
+                            <span class="text-sm text-caliRed font-bold uppercase tracking-widest">
+                                <span class="lang-vi">Tuần 1: Nhập Cuộc & Thấu Cảm Khách Hàng (01/06 - 07/06)</span>
+                                <span class="lang-en hidden">Week 1: Onboarding & Customer Empathy (01/06 - 07/06)</span>
+                            </span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">
+                                <span class="lang-vi">Góc Nhìn Khách Hàng Khó Tính & Khám Phá Vận Hành</span>
+                                <span class="lang-en hidden">High-Standard Customer Perspective & Operations Audit</span>
+                            </h2>
+                        </div>
+                        <div class="bg-slate-50 px-4 py-2 rounded-lg text-sm text-slate-600">
+                            <strong><span class="lang-vi">Trọng tâm:</span><span class="lang-en hidden">Focus:</span></strong> 
+                            <span class="lang-vi">Trải nghiệm sâu & Thấu hiểu cơ sở hạ tầng.</span>
+                            <span class="lang-en hidden">Deep experience & Understanding facility infrastructure.</span>
+                        </div>
+                    </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-red-50 border border-red-100 rounded-2xl p-5">
-          <p class="text-xs font-extrabold text-red-600 uppercase mb-2">Outcome 1</p>
-          <h3 class="font-extrabold text-slate-950 mb-2">Revenue Quality</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Reduce pricing noise, discount abuse and product splitting. Build a more disciplined sales model.
-          </p>
-        </div>
+                    <!-- Week 1 Objectives -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 space-y-6">
+                            <h3 class="text-lg font-bold flex items-center gap-2 text-caliRed">
+                                <i data-lucide="check-square" class="w-5 h-5"></i> 
+                                <span class="lang-vi">Các Hoạt Động Chi Tiết Hằng Ngày</span>
+                                <span class="lang-en hidden">Daily Detailed Activities</span>
+                            </h3>
+                            
+                            <!-- Timeline Accordion -->
+                            <div class="space-y-4">
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                    <div class="flex justify-between items-start">
+                                        <span class="text-xs bg-caliRed/20 text-caliRed px-2 py-0.5 rounded font-bold">
+                                            <span class="lang-vi">Thứ 2 - Thứ 3 (01-02/06)</span>
+                                            <span class="lang-en hidden">Mon - Tue (01-02/06)</span>
+                                        </span>
+                                        <span class="text-xs text-slate-500">Onboarding & Insider Orientation</span>
+                                    </div>
+                                    <h4 class="font-bold text-slate-900 mt-2">
+                                        <span class="lang-vi">Hội Nhập Doanh Nghiệp & Định Hướng</span>
+                                        <span class="lang-en hidden">Company Integration & Alignment</span>
+                                    </h4>
+                                    <p class="text-sm text-slate-500 mt-1 font-light">
+                                        <span class="lang-vi">Làm quen với đội ngũ Marketing tại Head Office, nghiên cứu brand guideline, cơ cấu tổ chức phòng ban và triết lý kinh doanh của Cali tại Việt Nam.</span>
+                                        <span class="lang-en hidden">Get familiar with the Marketing team at Head Office, study brand guidelines, organizational structure, and California's business philosophy in Vietnam.</span>
+                                    </p>
+                                </div>
 
-        <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-5">
-          <p class="text-xs font-extrabold text-emerald-600 uppercase mb-2">Outcome 2</p>
-          <h3 class="font-extrabold text-slate-950 mb-2">Member Value & Retention</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Improve member onboarding, PT usage, reactivation, renewal and lifetime value.
-          </p>
-        </div>
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                    <div class="flex justify-between items-start">
+                                        <span class="text-xs bg-orange-500/20 text-orange-500 px-2 py-0.5 rounded font-bold">
+                                            <span class="lang-vi">Thứ 4 - Thứ 5 (03-04/06)</span>
+                                            <span class="lang-en hidden">Wed - Thu (03-04/06)</span>
+                                        </span>
+                                        <span class="text-xs text-yellow-500 font-semibold">
+                                            <span class="lang-vi">🔥 Hoạt động đặc biệt</span>
+                                            <span class="lang-en hidden">🔥 Special Activity</span>
+                                        </span>
+                                    </div>
+                                    <h4 class="font-bold text-slate-900 mt-2 flex items-center gap-2">
+                                        <span class="lang-vi">Trải Nghiệm Hội Viên Khó Tính (Standard Siêu Cao)</span>
+                                        <span class="lang-en hidden">Demanding Member Experience (Extremely High Standards)</span>
+                                    </h4>
+                                    <p class="text-sm text-slate-500 mt-1 font-light">
+                                        <span class="lang-vi">Đóng vai một khách hàng cực kỳ khắt khe để audit chất lượng dịch vụ từ cổng bảo vệ, lễ tân, độ sạch sẽ của tủ đồ/phòng tắm, chất lượng máy tập cho tới thái độ của PT.</span>
+                                        <span class="lang-en hidden">Roleplay as an exceptionally demanding customer with high standards to audit quality of services across touchpoints: parking/guards, reception, locker/shower cleanliness, equipment condition, and PT behavior.</span>
+                                    </p>
+                                    <div class="mt-3 bg-black/30 p-3 rounded-lg border-l-2 border-caliRed text-xs text-slate-600">
+                                        <strong><span class="lang-vi">Nhiệm vụ:</span><span class="lang-en hidden">Mission:</span></strong> 
+                                        <span class="lang-vi">Viết 1 báo cáo "Audit Report" chỉ ra ít nhất 5 "điểm chạm" chưa hoàn hảo dưới góc nhìn khách hàng khó tính & đề xuất cách cải tiến nhanh.</span>
+                                        <span class="lang-en hidden">Write an "Audit Report" outlining at least 5 imperfect customer touchpoints from a picky member's point of view & propose immediate solutions.</span>
+                                    </div>
+                                </div>
 
-        <div class="bg-blue-50 border border-blue-100 rounded-2xl p-5">
-          <p class="text-xs font-extrabold text-blue-600 uppercase mb-2">Outcome 3</p>
-          <h3 class="font-extrabold text-slate-950 mb-2">Scalable Platform</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Build loyalty, e-commerce, payment and data systems that can scale across all clubs.
-          </p>
-        </div>
-      </div>
-    </section>
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                    <div class="flex justify-between items-start">
+                                        <span class="text-xs bg-emerald-500/20 text-emerald-500 px-2 py-0.5 rounded font-bold">
+                                            <span class="lang-vi">Thứ 6 - Thứ Bảy (05-06/06)</span>
+                                            <span class="lang-en hidden">Fri - Sat (05-06/06)</span>
+                                        </span>
+                                        <span class="text-xs text-slate-500">Deep-dive Operation</span>
+                                    </div>
+                                    <h4 class="font-bold text-slate-900 mt-2">
+                                        <span class="lang-vi">Phỏng vấn sâu Ban Quản Lý Câu Lạc Bộ (Club Manager)</span>
+                                        <span class="lang-en hidden">In-depth Interview with the Club Manager</span>
+                                    </h4>
+                                    <p class="text-sm text-slate-500 mt-1 font-light">
+                                        <span class="lang-vi">Tìm hiểu xem các phòng tập đang quản lý các vấn đề ý thức hội viên như thế nào và đâu là lỗi hành vi phổ biến nhất tại cơ sở.</span>
+                                        <span class="lang-en hidden">Learn how clubs handle member etiquette issues on site and identify the most frequent misbehaviors occurring in the facility.</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
-    <!-- BOD SUMMARY TABLE -->
-    <section id="summary" class="card p-6 lg:p-8 mb-8">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-6">
-        <div>
-          <h2 class="text-2xl font-extrabold text-slate-950">BOD Summary by Workstream</h2>
-          <p class="text-sm text-slate-500 mt-1">Simplified view: outcome, business impact, status and decision needed.</p>
-        </div>
-      </div>
-
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-sm">
-          <thead>
-            <tr class="text-xs uppercase text-slate-400 border-b border-slate-200">
-              <th class="py-3 pr-4">Workstream</th>
-              <th class="py-3 pr-4">Expected Outcome</th>
-              <th class="py-3 pr-4">Business Impact</th>
-              <th class="py-3 pr-4">Status</th>
-              <th class="py-3 pr-4">BOD Focus / Decision</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="table-row">
-              <td class="py-4 pr-4 font-extrabold text-slate-900">Commercial Foundation</td>
-              <td class="py-4 pr-4 text-slate-600">One clear view of conversion, pricing, PT attach and club performance.</td>
-              <td class="py-4 pr-4 text-slate-600">Improves business clarity and reduces fake performance reporting.</td>
-              <td class="py-4 pr-4"><span class="badge status-build">In Progress</span></td>
-              <td class="py-4 pr-4 text-slate-600">Agree final KPI logic and dashboard ownership.</td>
-            </tr>
-
-            <tr class="table-row">
-              <td class="py-4 pr-4 font-extrabold text-slate-900">Service Call</td>
-              <td class="py-4 pr-4 text-slate-600">New members are onboarded early and pushed into usage faster.</td>
-              <td class="py-4 pr-4 text-slate-600">Higher activation, lower early churn and stronger renewal base.</td>
-              <td class="py-4 pr-4"><span class="badge status-live">Operating</span></td>
-              <td class="py-4 pr-4 text-slate-600">Track retention and usage result after rollout.</td>
-            </tr>
-
-            <tr class="table-row">
-              <td class="py-4 pr-4 font-extrabold text-slate-900">Expired PT Reactivation</td>
-              <td class="py-4 pr-4 text-slate-600">Recover expired PT clients through data filter, gift trigger and MS follow-up.</td>
-              <td class="py-4 pr-4 text-slate-600">Creates near-term cash recovery and strengthens PT penetration.</td>
-              <td class="py-4 pr-4"><span class="badge status-build">Design</span></td>
-              <td class="py-4 pr-4 text-slate-600">Approve process, gift rule and official field announcement.</td>
-            </tr>
-
-            <tr class="table-row">
-              <td class="py-4 pr-4 font-extrabold text-slate-900">Member Reward / Loyalty</td>
-              <td class="py-4 pr-4 text-slate-600">Members have reasons to stay active, redeem and engage with the ecosystem.</td>
-              <td class="py-4 pr-4 text-slate-600">Supports retention, app usage, repeat purchase and customer loyalty.</td>
-              <td class="py-4 pr-4"><span class="badge status-uat">UAT / Demo</span></td>
-              <td class="py-4 pr-4 text-slate-600">Close UAT bugs and confirm launch scope.</td>
-            </tr>
-
-            <tr class="table-row">
-              <td class="py-4 pr-4 font-extrabold text-slate-900">E-Commerce Website</td>
-              <td class="py-4 pr-4 text-slate-600">Customers can view and buy selected packages through digital flow.</td>
-              <td class="py-4 pr-4 text-slate-600">Opens online sales channel and reduces dependency on manual quotation.</td>
-              <td class="py-4 pr-4"><span class="badge status-uat">UAT / Build</span></td>
-              <td class="py-4 pr-4 text-slate-600">Confirm product list, domain handover and go-live readiness.</td>
-            </tr>
-
-            <tr class="table-row">
-              <td class="py-4 pr-4 font-extrabold text-slate-900">Payment Process</td>
-              <td class="py-4 pr-4 text-slate-600">Payment collection becomes faster, cleaner and better connected to CRM / AX.</td>
-              <td class="py-4 pr-4 text-slate-600">Improves collection speed, reconciliation and customer payment experience.</td>
-              <td class="py-4 pr-4"><span class="badge status-uat">UAT Round 2</span></td>
-              <td class="py-4 pr-4 text-slate-600">Prioritize bug closure for card and bank transfer scenarios.</td>
-            </tr>
-
-            <tr class="table-row">
-              <td class="py-4 pr-4 font-extrabold text-slate-900">CWH Group Class</td>
-              <td class="py-4 pr-4 text-slate-600">CWH can sell group class products with clear system flow.</td>
-              <td class="py-4 pr-4 text-slate-600">Creates additional revenue line and supports wellness positioning.</td>
-              <td class="py-4 pr-4"><span class="badge status-uat">Demo</span></td>
-              <td class="py-4 pr-4 text-slate-600">Lock product rule and final demo outcome.</td>
-            </tr>
-
-            <tr class="table-row">
-              <td class="py-4 pr-4 font-extrabold text-slate-900">New Gym Model</td>
-              <td class="py-4 pr-4 text-slate-600">Prepare the system for future basis-access plus pay-up-to-usage model.</td>
-              <td class="py-4 pr-4 text-slate-600">Supports pricing control, customer flexibility and scalable membership design.</td>
-              <td class="py-4 pr-4"><span class="badge status-wait">Waiting IT</span></td>
-              <td class="py-4 pr-4 text-slate-600">Decide IT timeline and transition campaign requirement.</td>
-            </tr>
-
-            <tr class="table-row">
-              <td class="py-4 pr-4 font-extrabold text-slate-900">PT Expertise</td>
-              <td class="py-4 pr-4 text-slate-600">Build visible PT quality, specialty and certification structure.</td>
-              <td class="py-4 pr-4 text-slate-600">Improves PT trust, service quality, renewal and premium pricing confidence.</td>
-              <td class="py-4 pr-4"><span class="badge status-build">Build</span></td>
-              <td class="py-4 pr-4 text-slate-600">Confirm go-live standard and required IT support.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- OUTCOME FOCUS -->
-    <section id="outcomes" class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
-      <div class="card p-6 xl:col-span-2">
-        <h2 class="text-2xl font-extrabold text-slate-950 mb-4">Outcome Focus</h2>
-
-        <div class="space-y-4">
-          <div class="flex gap-4 p-4 rounded-2xl bg-red-50 border border-red-100">
-            <div class="w-9 h-9 rounded-xl bg-red-600 text-white font-black flex items-center justify-center">1</div>
-            <div>
-              <h3 class="font-extrabold text-slate-950">Revenue becomes cleaner</h3>
-              <p class="text-sm text-slate-600 mt-1">
-                Pricing must be consistent. Premium packages should be sold as controlled SKUs, not split into unofficial components.
-              </p>
+                        <!-- Week 1 Insights Card -->
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                                    <i data-lucide="compass" class="w-5 h-5 text-caliRed"></i> Insider Insight
+                                </h3>
+                                <p class="text-sm text-slate-500 leading-relaxed mb-4 italic font-light">
+                                    <span class="lang-vi">"Để hiểu được cách bán một phong cách sống (lifestyle), bạn không thể chỉ đứng nhìn từ bên ngoài. Trở thành một 'member khó tính' giúp bạn nhận diện được khoảng cách giữa cam kết thương hiệu (Brand Promise) và thực tế trải nghiệm khách hàng (Customer Experience)."</span>
+                                    <span class="lang-en hidden">"To understand how to sell a lifestyle, you cannot look from the sidelines. Becoming a 'demanding member' helps you map the true gap between Brand Promise and the actual Customer Experience."</span>
+                                </p>
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-2 text-xs text-slate-600">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-caliRed"></span> 
+                                        <span class="lang-vi">Thấu hiểu nỗi lo chất lượng phòng tập.</span>
+                                        <span class="lang-en hidden">Understand real member concerns on hygiene & quality.</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-xs text-slate-600">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-caliRed"></span> 
+                                        <span class="lang-vi">Tìm ra kẽ hở trong khâu vận hành thực tế.</span>
+                                        <span class="lang-en hidden">Identify operational cracks in real-world scenarios.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-slate-200">
+                                <span class="text-xs text-slate-400 uppercase block">KPI</span>
+                                <span class="text-sm font-bold text-slate-900">
+                                    <span class="lang-vi">1 Bản Audit Trải Nghiệm Khách Hàng (PDF/Slide)</span>
+                                    <span class="lang-en hidden">1 Customer Experience Audit Report (PDF/Slide)</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
 
-          <div class="flex gap-4 p-4 rounded-2xl bg-emerald-50 border border-emerald-100">
-            <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white font-black flex items-center justify-center">2</div>
-            <div>
-              <h3 class="font-extrabold text-slate-950">Member value increases</h3>
-              <p class="text-sm text-slate-600 mt-1">
-                Service Call, PT reactivation, loyalty and CWH must increase usage, renewal and ecosystem spending.
-              </p>
+            <!-- WEEK 2 PANEL -->
+            <div id="panel-2" class="space-y-8 hidden">
+                <div class="glass-card p-6 sm:p-8 rounded-2xl">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-6 border-b border-slate-200">
+                        <div>
+                            <span class="text-sm text-caliRed font-bold uppercase tracking-widest">
+                                <span class="lang-vi">Tuần 2: Sáng Tạo Chiến Dịch Thay Đổi Hành Vi (08/06 - 14/06)</span>
+                                <span class="lang-en hidden">Week 2: Behavior-Changing Campaign Creation (08/06 - 14/06)</span>
+                            </span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">
+                                <span class="lang-vi">Lên Ý Tưởng & Sản Xuất Video Giáo Dục Ý Thức Hội Viên</span>
+                                <span class="lang-en hidden">Concept Development & Video Production for Member Etiquette</span>
+                            </h2>
+                        </div>
+                        <div class="bg-slate-50 px-4 py-2 rounded-lg text-sm text-slate-600">
+                            <strong><span class="lang-vi">Trọng tâm:</span><span class="lang-en hidden">Focus:</span></strong> 
+                            <span class="lang-vi">Sáng tạo nội dung (Content Marketing) thực chiến.</span>
+                            <span class="lang-en hidden">Hands-on Content Marketing & Videography.</span>
+                        </div>
+                    </div>
+
+                    <!-- Week 2 Objectives -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 space-y-6">
+                            <h3 class="text-lg font-bold flex items-center gap-2 text-caliRed">
+                                <i data-lucide="video" class="w-5 h-5"></i> 
+                                <span class="lang-vi">Chiến Dịch Video: "Cali-Culture - Tập Văn Minh, Sống Cá Tính"</span>
+                                <span class="lang-en hidden">Video Campaign: "Cali-Culture - Workout Civilized, Live Stylized"</span>
+                            </h3>
+                            <p class="text-sm text-slate-600 font-light">
+                                <span class="lang-vi">Sử dụng sự hài hước để châm biếm nhẹ nhàng nhưng đầy cảm hứng về các hành vi chưa đẹp tại phòng tập, từ đó thôi thúc hội viên cùng nhau xây dựng văn hoá văn minh.</span>
+                                <span class="lang-en hidden">Use humor to satirize bad gym behaviors in an inspiring way, encouraging members to co-create a polished and professional community.</span>
+                            </p>
+
+                            <!-- Video concepts and production steps -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2">
+                                    <div class="flex items-center gap-2 text-amber-400">
+                                        <i data-lucide="clapperboard" class="w-4 h-4"></i>
+                                        <span class="text-xs font-bold uppercase">Concept 1</span>
+                                    </div>
+                                    <h5 class="font-bold text-sm text-slate-900">
+                                        <span class="lang-vi">"Chúa tể Sấy tóc" - Sấy đúng mục đích</span>
+                                        <span class="lang-en hidden">"The Hairdryer Lord" - Proper Usage</span>
+                                    </h5>
+                                    <p class="text-xs text-slate-500 font-light">
+                                        <span class="lang-vi">Ghi lại tình huống hài hước khi dùng máy sấy tóc công cộng sấy giày, quần áo, nách... Kêu gọi bảo vệ thiết bị chung vì mục đích vệ sinh.</span>
+                                        <span class="lang-en hidden">Humorously depict members using public dryers on shoes, armpits, or clothes. Call for respect toward hygiene and collective equipment.</span>
+                                    </p>
+                                </div>
+
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2">
+                                    <div class="flex items-center gap-2 text-sky-400">
+                                        <i data-lucide="dumbbell" class="w-4 h-4"></i>
+                                        <span class="text-xs font-bold uppercase">Concept 2</span>
+                                    </div>
+                                    <h5 class="font-bold text-sm text-slate-900">
+                                        <span class="lang-vi">"Kẻ mất tích bí ẩn" - Re-rack tạ</span>
+                                        <span class="lang-en hidden">"The Mystery of Stray Weights" - Re-racking</span>
+                                    </h5>
+                                    <p class="text-xs text-slate-500 font-light">
+                                        <span class="lang-vi">Xây dựng clip theo hướng trinh thám hài hước tìm tạ đơn bị bỏ lạc khắp phòng tập. Kêu gọi trả tạ về đúng vị trí để đảm bảo an toàn.</span>
+                                        <span class="lang-en hidden">Mock-detective style searching for stray dumbbells left in weird places. Urge members to re-rack weights back to original stands.</span>
+                                    </p>
+                                </div>
+
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2">
+                                    <div class="flex items-center gap-2 text-emerald-400">
+                                        <i data-lucide="footprints" class="w-4 h-4"></i>
+                                        <span class="text-xs font-bold uppercase">Concept 3</span>
+                                    </div>
+                                    <h5 class="font-bold text-sm text-slate-900">
+                                        <span class="lang-vi">"Thời trang phang an toàn" - Không mang dép lê</span>
+                                        <span class="lang-en hidden">"Fashion Over Safety" - Footwear Rules</span>
+                                    </h5>
+                                    <p class="text-xs text-slate-500 font-light">
+                                        <span class="lang-vi">Nêu bật nguy cơ trượt chân hoặc tạ đè ngón chân khi mang dép lê ở khu tạ nặng. Hướng dẫn mang giày thể thao an toàn và chuẩn gymer.</span>
+                                        <span class="lang-en hidden">Highlight the hazards of dropping weights or slipping while exercising in flip-flops. Direct members to wear proper athletic footwear.</span>
+                                    </p>
+                                </div>
+
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2">
+                                    <div class="flex items-center gap-2 text-pink-400">
+                                        <i data-lucide="users" class="w-4 h-4"></i>
+                                        <span class="text-xs font-bold uppercase">Concept 4</span>
+                                    </div>
+                                    <h5 class="font-bold text-sm text-slate-900">
+                                        <span class="lang-vi">"Xếp hàng hay Xếp hình" - Xếp hàng văn minh</span>
+                                        <span class="lang-en hidden">"Queue or Clash" - Polite Sharing</span>
+                                    </h5>
+                                    <p class="text-xs text-slate-500 font-light">
+                                        <span class="lang-vi">So sánh cảnh chen chúc giành giật máy tập với thói quen lịch thiệp hỏi: "Mình tập xen kẽ (alternate sets) được không bạn?"</span>
+                                        <span class="lang-en hidden">Contrast crowding around a hot machine with the gentlemanly approach: "Hey, mind if we alternate sets?" to foster fitness camaraderie.</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Production Steps -->
+                            <div class="bg-caliRed/10 p-4 rounded-xl border border-caliRed/20">
+                                <h4 class="font-bold text-sm text-caliRed mb-2 flex items-center gap-1.5">
+                                    <i data-lucide="pencil-line" class="w-4 h-4"></i> 
+                                    <span class="lang-vi">Quy trình thực hiện trong tuần:</span>
+                                    <span class="lang-en hidden">Weekly Production Steps:</span>
+                                </h4>
+                                <ul class="text-xs text-slate-600 space-y-1.5 list-decimal list-inside font-light">
+                                    <li><strong>Mon - Tue:</strong> <span class="lang-vi">Hoàn thiện kịch bản chi tiết (Scriptwriting), setup thiết bị quay cá nhân.</span><span class="lang-en hidden">Finalize scripts, prepare filming gear & layouts.</span></li>
+                                    <li><strong>Wed:</strong> <span class="lang-vi">Làm việc với quản lý cơ sở (Cali Landmark 81, v.v...) để ghi hình vào giờ thấp điểm, hợp tác cùng PT làm cameo.</span><span class="lang-en hidden">Coordinate with Club Manager (e.g. Cali LM81) to shoot during off-peak hours with PTs/members as cameos.</span></li>
+                                    <li><strong>Thu - Fri:</strong> <span class="lang-vi">Quay dựng định dạng dọc (TikTok/Reels), lồng nhạc và thuyết minh hài hước.</span><span class="lang-en hidden">Film & edit vertical video formats (TikTok/Reels) with trending audio & comedic voiceovers.</span></li>
+                                    <li><strong>Sat:</strong> <span class="lang-vi">Gửi phòng Marketing kiểm duyệt trước khi đăng bài.</span><span class="lang-en hidden">Submit draft to the Marketing team for review and approval.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Week 2 Side Panel -->
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                                    <i data-lucide="smile" class="w-5 h-5 text-caliRed"></i> Marketing Insight
+                                </h3>
+                                <p class="text-sm text-slate-500 leading-relaxed mb-4 italic font-light">
+                                    <span class="lang-vi">"Khách hàng ngày nay không muốn bị giáo huấn. Họ muốn được giải trí. Khi bạn lồng ghép các bài học quy định cứng nhắc thành các nội dung hài hước, mang tính tự trào, họ sẽ dễ tiếp nhận, tự chỉnh sửa hành vi và thậm chí chia sẻ nội dung đó cho bạn bè."</span>
+                                    <span class="lang-en hidden">"Modern consumers despise being lectured; they crave entertainment. Translating dry corporate rules into humorous self-satire makes people receptive, correction-willing, and eager to share."</span>
+                                </p>
+                                <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                                    <span class="text-xs text-amber-400 font-bold uppercase block mb-1">
+                                        <span class="lang-vi">Gợi ý kỹ thuật:</span>
+                                        <span class="lang-en hidden">Technical Tip:</span>
+                                    </span>
+                                    <p class="text-xs text-slate-500 font-light">
+                                        <span class="lang-vi">Áp dụng sự tương phản rõ nét giữa hành động chưa đẹp (gây cười/lố) và hành động văn minh (rất cool ngầu, tràn đầy năng lượng).</span>
+                                        <span class="lang-en hidden">Use extreme contrast: represent the annoying action in a goofy way and the proper action in a sleek, ultra-cool sporty style.</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-slate-200">
+                                <span class="text-xs text-slate-400 uppercase block">KPI</span>
+                                <span class="text-sm font-bold text-slate-900">
+                                    <span class="lang-vi">Tối thiểu 02 video ngắn (TikTok/Reels) hoàn thiện</span>
+                                    <span class="lang-en hidden">At least 02 short video deliverables (TikTok/Reels)</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
 
-          <div class="flex gap-4 p-4 rounded-2xl bg-blue-50 border border-blue-100">
-            <div class="w-9 h-9 rounded-xl bg-blue-600 text-white font-black flex items-center justify-center">3</div>
-            <div>
-              <h3 class="font-extrabold text-slate-950">Execution becomes scalable</h3>
-              <p class="text-sm text-slate-600 mt-1">
-                Dashboard, payment, e-commerce and commercial support must create repeatable execution across all clubs.
-              </p>
+            <!-- WEEK 3 PANEL -->
+            <div id="panel-3" class="space-y-8 hidden">
+                <div class="glass-card p-6 sm:p-8 rounded-2xl">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-6 border-b border-slate-200">
+                        <div>
+                            <span class="text-sm text-caliRed font-bold uppercase tracking-widest">
+                                <span class="lang-vi">Tuần 3: Đo Lường Hiệu Quả & Đúc Kết Bài Học (15/06 - 21/06)</span>
+                                <span class="lang-en hidden">Week 3: Analytics, Measurement & Lessons Learned (15/06 - 21/06)</span>
+                            </span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">
+                                <span class="lang-vi">Đo Lường Tương Tác & Thấu Hiểu Bài Học Xương Máu Ngành Fitness</span>
+                                <span class="lang-en hidden">Data Tracking & Core Fitness Business Lessons</span>
+                            </h2>
+                        </div>
+                        <div class="bg-slate-50 px-4 py-2 rounded-lg text-sm text-slate-600">
+                            <strong><span class="lang-vi">Trọng tâm:</span><span class="lang-en hidden">Focus:</span></strong> 
+                            <span class="lang-vi">Phân tích dữ liệu (Analytics) & Đúc kết chiến lược.</span>
+                            <span class="lang-en hidden">Data analytics & Strategic business synthesis.</span>
+                        </div>
+                    </div>
+
+                    <!-- Week 3 Objectives -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 space-y-6">
+                            
+                            <!-- Tracking Activity -->
+                            <div>
+                                <h3 class="text-lg font-bold flex items-center gap-2 text-caliRed mb-3">
+                                    <i data-lucide="bar-chart-3" class="w-5 h-5"></i> 
+                                    <span class="lang-vi">Hoạt động 1: Đo Lường & Tối Ưu Tương Tác Video</span>
+                                    <span class="lang-en hidden">Activity 1: Video Engagement Measurement & Optimization</span>
+                                </h3>
+                                <p class="text-sm text-slate-600 font-light mb-3">
+                                    <span class="lang-vi">Đăng tải các video sản xuất ở Tuần 2 lên các group cộng đồng người tập Cali (Facebook/TikTok) và tiến hành theo dõi các chỉ số theo thời gian thực (real-time).</span>
+                                    <span class="lang-en hidden">Post the Week 2 videos into Cali community channels, private member forums, and personal TikTok feeds, tracking real-time quantitative and qualitative metrics.</span>
+                                </p>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                        <span class="text-xs text-slate-500 block font-bold uppercase">
+                                            <span class="lang-vi">SỐ LƯỢNG (Quantitative)</span>
+                                            <span class="lang-en hidden">Quantitative</span>
+                                        </span>
+                                        <ul class="text-xs text-slate-600 space-y-1 mt-2">
+                                            <li>• <span class="lang-vi">Lượt xem (Views)</span><span class="lang-en hidden">Views count</span></li>
+                                            <li>• <span class="lang-vi">Lượt thích (Likes)</span><span class="lang-en hidden">Likes/Reactions</span></li>
+                                            <li>• <span class="lang-vi">Lượt chia sẻ (Shares)</span><span class="lang-en hidden">Shares / Reposts</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                        <span class="text-xs text-slate-500 block font-bold uppercase">
+                                            <span class="lang-vi">CHẤT LƯỢNG (Qualitative)</span>
+                                            <span class="lang-en hidden">Qualitative</span>
+                                        </span>
+                                        <ul class="text-xs text-slate-600 space-y-1 mt-2">
+                                            <li>• <span class="lang-vi">Thái độ (Sentiment)</span><span class="lang-en hidden">Sentiment analysis</span></li>
+                                            <li>• <span class="lang-vi">Bình luận tâm đắc nhất</span><span class="lang-en hidden">Best feedback highlights</span></li>
+                                            <li>• <span class="lang-vi">Gợi ý đóng góp thực tế</span><span class="lang-en hidden">Constructive suggestions</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                        <span class="text-xs text-slate-500 block font-bold uppercase">
+                                            <span class="lang-vi">TỶ LỆ GIỮ CHÂN (Retention)</span>
+                                            <span class="lang-en hidden">Retention Rate</span>
+                                        </span>
+                                        <ul class="text-xs text-slate-600 space-y-1 mt-2">
+                                            <li>• <span class="lang-vi">Thời gian xem trung bình</span><span class="lang-en hidden">Average watch time</span></li>
+                                            <li>• <span class="lang-vi">Điểm rơi (Drop-off point)</span><span class="lang-en hidden">Drop-off timelines</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hard-earned lessons -->
+                            <div class="border-t border-slate-200 pt-6">
+                                <h3 class="text-lg font-bold flex items-center gap-2 text-caliRed mb-4">
+                                    <i data-lucide="graduation-cap" class="w-5 h-5"></i> 
+                                    <span class="lang-vi">Hoạt động 2: 5 Bài Học Xương Máu Từ Thị Trường Fitness Việt Nam & Cách Giải Quyết</span>
+                                    <span class="lang-en hidden">Activity 2: 5 Hard-Earned Lessons From VN Fitness & Cali Solutions</span>
+                                </h3>
+                                <p class="text-sm text-slate-600 mb-4 font-light">
+                                    <span class="lang-vi">Nghiên cứu tài liệu nội bộ, phỏng vấn các Giám đốc Marketing/Vận hành của Cali để đúc kết 5 bài học xương máu:</span>
+                                    <span class="lang-en hidden">Analyze internal cases and interview Cali's Marketing/Operation leaders to detail how Cali addressed these fitness business challenges:</span>
+                                </p>
+                                
+                                <div class="space-y-3">
+                                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                        <div class="flex items-start gap-3">
+                                            <span class="bg-caliRed/20 text-caliRed w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold shrink-0 mt-0.5">1</span>
+                                            <div>
+                                                <h5 class="font-bold text-sm text-slate-900">
+                                                    <span class="lang-vi">Thách thức bán Thẻ Dài Hạn (Multi-year Membership) và Nỗi lo lừa đảo</span>
+                                                    <span class="lang-en hidden">Long-term Membership Sales Challenges & Trust Crises</span>
+                                                </h5>
+                                                <p class="text-xs text-slate-500 mt-1 font-light">
+                                                    <span class="lang-vi"><strong>Cali giải quyết:</strong> Tăng tính minh bạch về giá, liên kết các ngân hàng lớn hỗ trợ trả góp 0% lãi suất giúp giảm áp lực tài chính và củng cố lòng tin khách hàng.</span>
+                                                    <span class="lang-en hidden"><strong>Cali's solution:</strong> Increased price transparency, integrated major banking alliances to support 0% interest installments, lowering the barrier to entry and securing long-term customer trust.</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                        <div class="flex items-start gap-3">
+                                            <span class="bg-caliRed/20 text-caliRed w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold shrink-0 mt-0.5">2</span>
+                                            <div>
+                                                <h5 class="font-bold text-sm text-slate-900">
+                                                    <span class="lang-vi">"Nạn" chèo kéo của PT gây ác cảm cho khách hàng</span>
+                                                    <span class="lang-en hidden">Aggressive PT Up-selling Creating Customer Resentment</span>
+                                                </h5>
+                                                <p class="text-xs text-slate-500 mt-1 font-light">
+                                                    <span class="lang-vi"><strong>Cali giải quyết:</strong> Chuyển đổi mô hình PT sang cố vấn chăm sóc sức khỏe chuyên nghiệp. Đặt chỉ số hài lòng của hội viên (NPS) làm thước đo đánh giá hoa hồng cho PT, siết chặt kỷ luật phòng tập.</span>
+                                                    <span class="lang-en hidden"><strong>Cali's solution:</strong> Transformed PTs into wellness coaches. Embedded Member Satisfaction (NPS score) into their commission calculations to enforce strict corporate ethics.</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                        <div class="flex items-start gap-3">
+                                            <span class="bg-caliRed/20 text-caliRed w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold shrink-0 mt-0.5">3</span>
+                                            <div>
+                                                <h5 class="font-bold text-sm text-slate-900">
+                                                    <span class="lang-vi">Vấn nạn "Hội viên biến mất" sau Tết hoặc sau 1 tháng tập</span>
+                                                    <span class="lang-en hidden">The "Disappearing Member" Syndrome (Churn after month 1)</span>
+                                                </h5>
+                                                <p class="text-xs text-slate-500 mt-1 font-light">
+                                                    <span class="lang-vi"><strong>Cali giải quyết:</strong> Ứng dụng công nghệ kích hoạt tương tác (Gamification), các thử thách 21 ngày, chiến dịch cộng đồng để tạo động lực tập luyện liên tục cho hội viên mới.</span>
+                                                    <span class="lang-en hidden"><strong>Cali's solution:</strong> Leveraged Gamification in the app, created "21-Day Habit Builders" and community check-in campaigns to keep beginners driven and engaged.</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                        <div class="flex items-start gap-3">
+                                            <span class="bg-caliRed/20 text-caliRed w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold shrink-0 mt-0.5">4</span>
+                                            <div>
+                                                <h5 class="font-bold text-sm text-slate-900">
+                                                    <span class="lang-vi">Cạnh tranh khốc liệt từ các phòng tập Boutique giá rẻ và Gym cỏ</span>
+                                                    <span class="lang-en hidden">Intense Competition from Cheap Gyms & Boutique Studios</span>
+                                                </h5>
+                                                <p class="text-xs text-slate-500 mt-1 font-light">
+                                                    <span class="lang-vi"><strong>Cali giải quyết:</strong> Định vị là điểm đến "Tất cả trong một" (Lớp GroupX bản quyền Les Mills, Yoga Ấn Độ, Hồ bơi, Sauna, Steam room). Nhấn mạnh vào giá trị lối sống (lifestyle) toàn diện thay vì chỉ là nơi nâng tạ.</span>
+                                                    <span class="lang-en hidden"><strong>Cali's solution:</strong> Brand positioned as the ultimate "All-in-one Wellness Hub" (with exclusive Les Mills classes, original Indian Yoga, pool, saunas). Promoted comprehensive lifestyle value over raw heavy lifting.</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                        <div class="flex items-start gap-3">
+                                            <span class="bg-caliRed/20 text-caliRed w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold shrink-0 mt-0.5">5</span>
+                                            <div>
+                                                <h5 class="font-bold text-sm text-slate-900">
+                                                    <span class="lang-vi">Văn hoá hành xử thiếu văn minh phá hỏng không khí phòng tập</span>
+                                                    <span class="lang-en hidden">Gym Etiquette Violations Degrading Club Atmosphere</span>
+                                                </h5>
+                                                <p class="text-xs text-slate-500 mt-1 font-light">
+                                                    <span class="lang-vi"><strong>Cali giải quyết:</strong> Truyền thông nội bộ liên tục, hướng dẫn hội viên thông qua các chiến dịch giáo dục ý thức nhẹ nhàng, trực quan (như chính dự án làm video của bạn trong kỳ thực tập này!).</span>
+                                                    <span class="lang-en hidden"><strong>Cali's solution:</strong> Run persistent, visual internal communication campaigns (similar to the viral video project you are undertaking in Week 2!).</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Week 3 Side Panel -->
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                                    <i data-lucide="line-chart" class="w-5 h-5 text-caliRed"></i> Business Insight
+                                </h3>
+                                <p class="text-sm text-slate-500 leading-relaxed mb-4 italic font-light">
+                                    <span class="lang-vi">"Một nhà làm marketing giỏi không chỉ mang khách hàng về câu lạc bộ, mà còn phải cùng vận hành giữ chân họ. Bằng cách thấu hiểu 5 bài học xương máu của Cali, bạn sẽ hiểu được tại sao các quyết định định giá thương hiệu, truyền thông nội bộ lại quan trọng đến thế."</span>
+                                    <span class="lang-en hidden">"A good marketer does not stop after getting customers through the door; they collaborate with operations to keep them inside. Mastering Cali's 5 business lessons reveals why strategic pricing and internal branding are absolutely vital."</span>
+                                </p>
+                                <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 space-y-2">
+                                    <span class="text-xs text-emerald-400 font-bold uppercase block">
+                                        <span class="lang-vi">Mock-up đo lường nhanh:</span>
+                                        <span class="lang-en hidden">Mock-up Measurement Benchmarks:</span>
+                                    </span>
+                                    <div class="flex justify-between text-xs text-slate-600">
+                                        <span><span class="lang-vi">Lượt tiếp cận mục tiêu:</span><span class="lang-en hidden">Target Reach Goal:</span></span>
+                                        <span class="font-bold">10,000+</span>
+                                    </div>
+                                    <div class="flex justify-between text-xs text-slate-600">
+                                        <span><span class="lang-vi">Tỉ lệ tương tác (ER):</span><span class="lang-en hidden">Engagement Rate:</span></span>
+                                        <span class="font-bold">> 8.5%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-slate-200">
+                                <span class="text-xs text-slate-400 uppercase block">KPI</span>
+                                <span class="text-sm font-bold text-slate-900">
+                                    <span class="lang-vi">Báo cáo phân tích tương tác & 1 Tiểu luận "5 Bài Học Xương Máu"</span>
+                                    <span class="lang-en hidden">Video performance report & 1 Essay on "5 Core Lessons"</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
 
-      <div class="card p-6">
-        <h2 class="text-2xl font-extrabold text-slate-950 mb-4">Status Mix</h2>
+        <!-- Dashboard Simulator Quick Tool -->
+        <div class="mt-12 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h3 class="text-xl font-extrabold text-slate-900 mb-4 flex items-center gap-2">
+                <i data-lucide="gauge" class="text-caliRed w-6 h-6"></i> 
+                <span class="lang-vi">Trình Mô Phỏng Đo Lường Tương Tác Video (Thực Tập Sinh)</span>
+                <span class="lang-en hidden">Video Engagement Metrics Simulator (Intern Work tool)</span>
+            </h3>
+            <p class="text-sm text-slate-600 mb-6 font-light">
+                <span class="lang-vi">Nhập thử số liệu thực tế sau khi bạn đăng video lên các nền tảng mạng xã hội để kiểm tra xem chiến dịch giáo dục ý thức hội viên của bạn có đạt hiệu quả cao hay không.</span>
+                <span class="lang-en hidden">Enter simulated or real metrics once you post your videos on community groups or social handles to instantly gauge the performance & receive feedback.</span>
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Inputs -->
+                <div class="space-y-4 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="text-xs font-bold uppercase text-slate-500">
+                        <span class="lang-vi">Bước 1: Nhập dữ liệu của bạn</span>
+                        <span class="lang-en hidden">Step 1: Input your metrics</span>
+                    </h4>
+                    <div>
+                        <label class="block text-xs text-slate-600 font-medium mb-1">
+                            <span class="lang-vi">Tổng lượt xem video (Views)</span>
+                            <span class="lang-en hidden">Total Video Views</span>
+                        </label>
+                        <input type="number" id="sim-views" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-caliRed/20 focus:border-caliRed" value="5200">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-600 font-medium mb-1">
+                            <span class="lang-vi">Tổng lượt Thích & Tim (Likes)</span>
+                            <span class="lang-en hidden">Total Likes</span>
+                        </label>
+                        <input type="number" id="sim-likes" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-caliRed/20 focus:border-caliRed" value="450">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-600 font-medium mb-1">
+                            <span class="lang-vi">Bình luận (Comments)</span>
+                            <span class="lang-en hidden">Comments</span>
+                        </label>
+                        <input type="number" id="sim-comments" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-caliRed/20 focus:border-caliRed" value="60">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-600 font-medium mb-1">
+                            <span class="lang-vi">Chia sẻ (Shares)</span>
+                            <span class="lang-en hidden">Shares</span>
+                        </label>
+                        <input type="number" id="sim-shares" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-caliRed/20 focus:border-caliRed" value="25">
+                    </div>
+                    <button onclick="calculateMetrics()" class="w-full bg-caliRed text-white py-2 px-4 rounded-lg font-bold hover:bg-red-700 transition shadow-sm">
+                        <span class="lang-vi">Tính Toán Tương Tác</span>
+                        <span class="lang-en hidden">Calculate Engagement</span>
+                    </button>
+                </div>
 
-        <div class="space-y-4">
-          <div>
-            <div class="flex justify-between text-xs font-bold mb-1">
-              <span>Operating</span><span>1</span>
+                <!-- Outputs / Visual representation -->
+                <div class="md:col-span-2 bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-xs font-bold uppercase text-slate-500 mb-4">
+                            <span class="lang-vi">Bước 2: Kết quả đánh giá chiến dịch</span>
+                            <span class="lang-en hidden">Step 2: Campaign Performance Assessment</span>
+                        </h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                <span class="text-xs text-slate-500 block font-semibold">
+                                    <span class="lang-vi">Facebook Impact ER</span>
+                                    <span class="lang-en hidden">Facebook Impact ER</span>
+                                </span>
+                                <span id="out-er" class="text-2xl sm:text-3xl font-black text-caliRed block mt-1">10.29%</span>
+                                <span class="text-[10px] text-slate-400 block mt-1">(Cali Impact Score / Views)</span>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                <span class="text-xs text-slate-500 block font-semibold">
+                                    <span class="lang-vi">Đánh giá Hiệu Quả Viral</span>
+                                    <span class="lang-en hidden">Viral Assessment</span>
+                                </span>
+                                <span id="out-status" class="text-sm sm:text-lg font-bold text-emerald-400 block mt-1">
+                                    <span class="lang-vi">Khá Viral (Rất tiềm năng)</span>
+                                    <span class="lang-en hidden">Moderately Viral (High Potential)</span>
+                                </span>
+                                <span class="text-[10px] text-slate-400 block mt-1">Cali Benchmark Standard</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t border-slate-200">
+                        <span class="text-xs text-slate-500 block mb-2 font-bold uppercase">
+                            <span class="lang-vi">Gợi ý hành động từ đội ngũ Marketing:</span>
+                            <span class="lang-en hidden">Marketing Actions Recommendation:</span>
+                        </span>
+                        <p id="out-suggestion" class="text-xs text-slate-700 leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-200 border-l-4 border-l-emerald-500 font-light">
+                            Video đang có tỷ lệ tương tác rất tốt (>8%). Bạn nên chia sẻ thêm vào các nhóm cộng đồng không chính thức của Cali như "Cộng đồng Gymer Cali", "Hội tập gym Landmark 81" để tiếp tục duy trì làn sóng thảo luận về lối sống văn minh.
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="progress-track"><div class="progress-fill" style="width:12%; background:#16a34a;"></div></div>
-          </div>
 
-          <div>
-            <div class="flex justify-between text-xs font-bold mb-1">
-              <span>UAT / Demo</span><span>4</span>
+            <!-- Calculation Explanation -->
+            <div class="mt-6 bg-slate-50 border border-slate-200 rounded-xl p-5">
+                <h4 class="text-sm font-extrabold uppercase tracking-wide text-slate-900 mb-3 flex items-center gap-2">
+                    <i data-lucide="calculator" class="w-4 h-4 text-caliRed"></i>
+                    <span class="lang-vi">Cách tính mới: Cali Engagement Impact Score</span>
+                    <span class="lang-en hidden">New Calculation: Cali Engagement Impact Score</span>
+                </h4>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-white border border-slate-200 rounded-lg p-4">
+                        <div class="text-xs font-bold text-slate-500 uppercase mb-2">Formula</div>
+                        <p class="text-slate-700 leading-relaxed">
+                            <span class="lang-vi"><strong>Impact Score</strong> = Likes × 1 + Comments × 3 + Shares × 5 + Views × 0.02</span>
+                            <span class="lang-en hidden"><strong>Impact Score</strong> = Likes × 1 + Comments × 3 + Shares × 5 + Views × 0.02</span>
+                        </p>
+                        <p class="text-slate-700 leading-relaxed mt-1">
+                            <span class="lang-vi"><strong>Facebook Impact ER (%)</strong> = Impact Score / Views × 100</span>
+                            <span class="lang-en hidden"><strong>Facebook Impact ER (%)</strong> = Impact Score / Views × 100</span>
+                        </p>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-lg p-4">
+                        <div class="text-xs font-bold text-slate-500 uppercase mb-2">Example</div>
+                        <p class="text-slate-700 leading-relaxed">
+                            <span class="lang-vi">Mặc định: 5,200 views, 450 likes, 60 comments, 25 shares.</span>
+                            <span class="lang-en hidden">Default: 5,200 views, 450 likes, 60 comments, 25 shares.</span>
+                        </p>
+                        <p class="text-slate-900 font-bold mt-1">
+                            <span class="lang-vi">Impact Score = 450 + 180 + 125 + 104 = 859</span>
+                            <span class="lang-en hidden">Impact Score = 450 + 180 + 125 + 104 = 859</span>
+                        </p>
+                        <p class="text-slate-900 font-bold mt-1">
+                            <span class="lang-vi">Facebook Impact ER = 859 / 5,200 × 100 = 16.52%</span>
+                            <span class="lang-en hidden">Facebook Impact ER = 859 / 5,200 × 100 = 16.52%</span>
+                        </p>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-lg p-4">
+                        <div class="text-xs font-bold text-slate-500 uppercase mb-2">Benchmark</div>
+                        <div class="space-y-1 text-slate-700">
+                            <p><span class="font-bold text-rose-500">&lt; 5%</span> — <span class="lang-vi">Weak</span><span class="lang-en hidden">Weak</span></p>
+                            <p><span class="font-bold text-amber-500">5% - 10%</span> — <span class="lang-vi">Average</span><span class="lang-en hidden">Average</span></p>
+                            <p><span class="font-bold text-sky-500">10% - 15%</span> — <span class="lang-vi">Strong</span><span class="lang-en hidden">Strong</span></p>
+                            <p><span class="font-bold text-emerald-500">15% - 25%</span> — <span class="lang-vi">Excellent</span><span class="lang-en hidden">Excellent</span></p>
+                            <p><span class="font-bold text-caliRed">&gt; 25%</span> — <span class="lang-vi">Viral</span><span class="lang-en hidden">Viral</span></p>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 mt-4 leading-relaxed">
+                    <span class="lang-vi">Lý do dùng mô hình này: các chỉ số Views, Likes, Comments và Shares đều dễ lấy trực tiếp từ Facebook Page/Post. Like là tín hiệu nhẹ; Comment cho thấy người xem tham gia sâu hơn; Share là tín hiệu lan truyền mạnh nhất; Views phản ánh độ phủ nhưng chỉ cộng nhẹ để không làm méo kết quả.</span>
+                    <span class="lang-en hidden">Why this model: Views, Likes, Comments, and Shares are easy to collect from Facebook Page/Post insights. Likes are light signals; comments show deeper participation; shares are the strongest distribution signal; views reflect reach but only receive a light contribution to avoid distorting the result.</span>
+                </p>
             </div>
-            <div class="progress-track"><div class="progress-fill" style="width:45%; background:#2563eb;"></div></div>
-          </div>
 
-          <div>
-            <div class="flex justify-between text-xs font-bold mb-1">
-              <span>Build / Design</span><span>3</span>
-            </div>
-            <div class="progress-track"><div class="progress-fill" style="width:33%; background:#f59e0b;"></div></div>
-          </div>
+    </main>
 
-          <div>
-            <div class="flex justify-between text-xs font-bold mb-1">
-              <span>Waiting IT</span><span>1</span>
-            </div>
-            <div class="progress-track"><div class="progress-fill" style="width:10%; background:#64748b;"></div></div>
-          </div>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-400 space-y-2 font-light">
+            <p>
+                <span class="lang-vi">© 2026 California Fitness & Yoga. Bản thiết kế Agenda nội bộ phục vụ cho Chương trình Thực Tập Sinh Marketing.</span>
+                <span class="lang-en hidden">© 2026 California Fitness & Yoga. Internal Internship Agenda Blueprint.</span>
+            </p>
+            <p>
+                <span class="lang-vi">Trải nghiệm tốt nhất trên thiết bị di động và máy tính cá nhân.</span>
+                <span class="lang-en hidden">Optimized for both mobile viewports and desktop experiences.</span>
+            </p>
         </div>
-      </div>
-    </section>
-
-    <!-- PHASE 2 -->
-    <section id="phase2" class="card p-6 lg:p-8 mb-8">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
-        <div>
-          <p class="text-red-600 font-extrabold text-xs uppercase tracking-[0.25em] mb-2">New Project Phase 2</p>
-          <h2 class="text-2xl font-extrabold text-slate-950">Commercial Support Execution Arm</h2>
-          <p class="text-sm text-slate-500 mt-1">
-            Designed to close the gap between Head Office strategy and club-floor execution.
-          </p>
-        </div>
-        <span class="badge status-risk">May 2026 Priority</span>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
-        <div class="bg-red-50 border border-red-100 rounded-2xl p-5">
-          <p class="text-xs font-extrabold text-red-600 uppercase mb-2">Convert</p>
-          <h3 class="font-extrabold text-slate-950 mb-2">Guest to Member</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Improve conversion through consistent sales flow, correct pricing and clear product explanation.
-          </p>
-        </div>
-
-        <div class="bg-blue-50 border border-blue-100 rounded-2xl p-5">
-          <p class="text-xs font-extrabold text-blue-600 uppercase mb-2">Optimize</p>
-          <h3 class="font-extrabold text-slate-950 mb-2">Member to Ecosystem</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Increase lifetime value by connecting members to PT, Supplements, Hypoxi and Vita.
-          </p>
-        </div>
-
-        <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-5">
-          <p class="text-xs font-extrabold text-emerald-600 uppercase mb-2">Retain</p>
-          <h3 class="font-extrabold text-slate-950 mb-2">Usage to Loyalty</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Drive usage, results, proactive care and renewal readiness.
-          </p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        <div class="rounded-2xl border border-slate-200 p-5">
-          <h3 class="font-extrabold text-slate-950 mb-4">Problem to Solve</h3>
-          <ul class="text-sm text-slate-600 space-y-3">
-            <li><strong>Inconsistent execution:</strong> Club results depend too much on individual manager capability.</li>
-            <li><strong>Pricing noise:</strong> Unauthorized benefit splitting creates messy quotation and discount pressure.</li>
-            <li><strong>Low trust:</strong> Customers and field teams lose confidence when offer logic is not consistent.</li>
-          </ul>
-        </div>
-
-        <div class="rounded-2xl border border-slate-200 p-5">
-          <h3 class="font-extrabold text-slate-950 mb-4">Expected Outcome</h3>
-          <ul class="text-sm text-slate-600 space-y-3">
-            <li><strong>Better conversion:</strong> Same product story and pricing discipline across clubs.</li>
-            <li><strong>Higher PT penetration:</strong> Better handover from membership to PT ecosystem.</li>
-            <li><strong>Lower discount leakage:</strong> Stronger control on offer, package and SKU logic.</li>
-          </ul>
-        </div>
-
-        <div class="rounded-2xl border border-red-200 bg-red-50 p-5">
-          <h3 class="font-extrabold text-slate-950 mb-4">Control Mechanism</h3>
-          <ul class="text-sm text-slate-700 space-y-3">
-            <li><strong>Single SKU rule:</strong> Embedded benefits cannot be split and sold separately.</li>
-            <li><strong>Audit:</strong> Random checks on online quotation, club posting and customer offer.</li>
-            <li><strong>Enforcement:</strong> First offense = 50% income cut. Second offense = termination.</li>
-            <li><strong>Manager accountability:</strong> 5,000,000 VND penalty if manager fails to control team compliance.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- RISKS -->
-    <section id="risks" class="card p-6 lg:p-8 mb-8">
-      <h2 class="text-2xl font-extrabold text-slate-950 mb-5">Risks & Decisions Needed</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-        <div class="border border-red-100 bg-red-50 rounded-2xl p-5">
-          <span class="badge status-risk mb-3">Risk</span>
-          <h3 class="font-extrabold mb-2">IT bottleneck</h3>
-          <p class="text-sm text-slate-600">Too many projects depend on IT build, bug fixing and UAT sign-off.</p>
-        </div>
-
-        <div class="border border-amber-100 bg-amber-50 rounded-2xl p-5">
-          <span class="badge status-build mb-3">Risk</span>
-          <h3 class="font-extrabold mb-2">Too many parallel streams</h3>
-          <p class="text-sm text-slate-600">Without clear priority, execution may become busy but not outcome-driven.</p>
-        </div>
-
-        <div class="border border-slate-200 bg-slate-50 rounded-2xl p-5">
-          <span class="badge status-wait mb-3">Decision</span>
-          <h3 class="font-extrabold mb-2">Launch scope</h3>
-          <p class="text-sm text-slate-600">BOD should confirm which streams must go live first and which can wait.</p>
-        </div>
-
-        <div class="border border-blue-100 bg-blue-50 rounded-2xl p-5">
-          <span class="badge status-uat mb-3">Decision</span>
-          <h3 class="font-extrabold mb-2">Ownership</h3>
-          <p class="text-sm text-slate-600">Each workstream needs one owner accountable for outcome, not only task completion.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- NEXT 30 DAYS -->
-    <section id="next" class="card p-6 lg:p-8 mb-8">
-      <h2 class="text-2xl font-extrabold text-slate-950 mb-5">Next 30 Days Action Focus</h2>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div class="rounded-2xl border border-slate-200 p-5">
-          <p class="text-xs font-extrabold text-red-600 uppercase mb-2">Focus 1</p>
-          <h3 class="font-extrabold mb-2">Lock outcome dashboard</h3>
-          <ul class="text-sm text-slate-600 space-y-2">
-            <li>• Finalize KPI logic</li>
-            <li>• Confirm data owner</li>
-            <li>• Start weekly BOD summary format</li>
-          </ul>
-        </div>
-
-        <div class="rounded-2xl border border-slate-200 p-5">
-          <p class="text-xs font-extrabold text-blue-600 uppercase mb-2">Focus 2</p>
-          <h3 class="font-extrabold mb-2">Close critical UAT loops</h3>
-          <ul class="text-sm text-slate-600 space-y-2">
-            <li>• Loyalty UAT closure</li>
-            <li>• Payment bug fix and retest</li>
-            <li>• E-commerce go-live readiness</li>
-          </ul>
-        </div>
-
-        <div class="rounded-2xl border border-slate-200 p-5">
-          <p class="text-xs font-extrabold text-emerald-600 uppercase mb-2">Focus 3</p>
-          <h3 class="font-extrabold mb-2">Deploy Phase 2 control</h3>
-          <ul class="text-sm text-slate-600 space-y-2">
-            <li>• Launch Commercial Support role</li>
-            <li>• Enforce pricing and SKU rules</li>
-            <li>• Report club compliance weekly</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="mt-10 pt-8 border-t border-slate-200 text-center">
-      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-        California Commercial Team | BOD Summary Roadmap Update | Internal Use
-      </p>
     </footer>
 
-  </main>
-</div>
+    <!-- Tab Control Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
 
+        // Language State
+        let currentLang = 'vi';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+
+            // UI updates for buttons
+            const btnVi = document.getElementById('btn-lang-vi');
+            const btnEn = document.getElementById('btn-lang-en');
+
+            if (lang === 'vi') {
+                btnVi.className = "px-2 py-1 rounded bg-caliRed text-white font-bold text-xs transition-all";
+                btnEn.className = "px-2 py-1 rounded text-slate-500 font-bold text-xs hover:text-slate-900 transition-all";
+                
+                // Show VI tags, hide EN tags
+                document.querySelectorAll('.lang-vi').forEach(el => el.classList.remove('hidden'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.add('hidden'));
+            } else {
+                btnEn.className = "px-2 py-1 rounded bg-caliRed text-white font-bold text-xs transition-all";
+                btnVi.className = "px-2 py-1 rounded text-slate-500 font-bold text-xs hover:text-slate-900 transition-all";
+                
+                // Show EN tags, hide VI tags
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.remove('hidden'));
+                document.querySelectorAll('.lang-vi').forEach(el => el.classList.add('hidden'));
+            }
+
+            // Recalculate metrics to render dynamic output strings in correct language
+            calculateMetrics();
+        }
+
+        function switchTab(tabIndex) {
+            // Hide all panels
+            document.getElementById('panel-1').classList.add('hidden');
+            document.getElementById('panel-2').classList.add('hidden');
+            document.getElementById('panel-3').classList.add('hidden');
+
+            // Reset tab button styles
+            for (let i = 1; i <= 3; i++) {
+                const btn = document.getElementById(`tab-btn-${i}`);
+                btn.className = "flex-1 py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-500 hover:text-slate-900";
+            }
+
+            // Show active panel & active button style
+            document.getElementById(`panel-${tabIndex}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-btn-${tabIndex}`);
+            activeBtn.className = "flex-1 py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-900 bg-caliRed";
+        }
+
+        // Calculation Logic for Simulated Dashboard
+        function calculateMetrics() {
+            const views = parseFloat(document.getElementById('sim-views').value) || 0;
+            const likes = parseFloat(document.getElementById('sim-likes').value) || 0;
+            const comments = parseFloat(document.getElementById('sim-comments').value) || 0;
+            const shares = parseFloat(document.getElementById('sim-shares').value) || 0;
+
+            const outEr = document.getElementById('out-er');
+            const outStatus = document.getElementById('out-status');
+            const outSuggestion = document.getElementById('out-suggestion');
+
+            if (views === 0) {
+                outEr.innerText = "0.00%";
+                if (currentLang === 'vi') {
+                    outStatus.innerText = "Chưa có dữ liệu";
+                    outSuggestion.innerText = "Hãy điền số view lớn hơn 0 để tính toán hiệu quả truyền thông của bạn.";
+                } else {
+                    outStatus.innerText = "No Data Yet";
+                    outSuggestion.innerText = "Please input a view count higher than 0 to evaluate your content impact.";
+                }
+                outStatus.className = "text-lg font-bold text-slate-500 block mt-1";
+                return;
+            }
+
+            // Cali Engagement Impact Score - easy Facebook metrics only
+            // Likes = 1 point, Comments = 3 points, Shares = 5 points, Views = 0.02 point each.
+            const score = (likes * 1) + (comments * 3) + (shares * 5) + (views * 0.02);
+            const er = (score / views) * 100;
+
+            outEr.innerText = er.toFixed(2) + "%";
+
+            let status = "";
+            let statusClass = "";
+            let suggestion = "";
+
+            if (er < 5) {
+                statusClass = "text-sm sm:text-lg font-bold text-rose-500 block mt-1";
+                if (currentLang === 'vi') {
+                    status = "Weak / Cần cải thiện";
+                    suggestion = "Facebook Impact ER dưới 5% cho thấy nội dung chưa tạo đủ hành động sâu. Hãy cải thiện hook 3 giây đầu, tiêu đề, nhịp dựng và CTA để khuyến khích bình luận hoặc chia sẻ.";
+                } else {
+                    status = "Weak / Needs Improvement";
+                    suggestion = "Facebook Impact ER below 5% means the content is not driving enough meaningful action. Improve the first 3-second hook, caption, editing pace, and CTA to encourage comments or shares.";
+                }
+            } else if (er < 10) {
+                statusClass = "text-sm sm:text-lg font-bold text-amber-500 block mt-1";
+                if (currentLang === 'vi') {
+                    status = "Average / Trung bình";
+                    suggestion = "Nội dung đang đạt mức ổn nhưng chưa đủ mạnh. Nên thử A/B testing hook, thumbnail/caption và kêu gọi hội viên comment trải nghiệm cá nhân.";
+                } else {
+                    status = "Average";
+                    suggestion = "Performance is stable but not yet strong. Try A/B testing the hook, thumbnail/caption, and ask members to comment with their own experiences.";
+                }
+            } else if (er < 15) {
+                statusClass = "text-sm sm:text-lg font-bold text-sky-500 block mt-1";
+                if (currentLang === 'vi') {
+                    status = "Strong / Tốt";
+                    suggestion = "Nội dung có tín hiệu tốt. Hãy đẩy thêm vào group cộng đồng, ghim comment dẫn dắt thảo luận và tái sử dụng thành short clip khác.";
+                } else {
+                    status = "Strong";
+                    suggestion = "The content shows strong signals. Push it into community groups, pin a conversation-driving comment, and repurpose it into another short clip.";
+                }
+            } else if (er < 25) {
+                statusClass = "text-sm sm:text-lg font-bold text-emerald-500 block mt-1";
+                if (currentLang === 'vi') {
+                    status = "Excellent / Xuất sắc";
+                    suggestion = "Facebook Impact ER trên 15% là rất tốt. Nên nhân rộng format này, yêu cầu team Marketing review để đăng chính thức hoặc biến thành series nội dung.";
+                } else {
+                    status = "Excellent";
+                    suggestion = "Facebook Impact ER above 15% is excellent. Scale this format, ask Marketing to review it for official posting, or turn it into a recurring content series.";
+                }
+            } else {
+                statusClass = "text-sm sm:text-lg font-bold text-caliRed block mt-1";
+                if (currentLang === 'vi') {
+                    status = "Viral / Rất mạnh";
+                    suggestion = "Nội dung đang có tín hiệu viral rất mạnh. Hãy nhanh chóng khuếch đại qua các kênh cộng đồng, remake thêm phiên bản mới và đo sentiment để tránh hiểu sai thông điệp.";
+                } else {
+                    status = "Viral";
+                    suggestion = "The content is showing very strong viral signals. Amplify it quickly across community channels, remake new versions, and track sentiment to avoid message misinterpretation.";
+                }
+            }
+
+            outStatus.innerText = status;
+            outStatus.className = statusClass;
+            outSuggestion.innerText = suggestion;
+        }
+
+        // Run calculation once on page load to fill initial states
+        calculateMetrics();
+    </script>
 </body>
 </html>
