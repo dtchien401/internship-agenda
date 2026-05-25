@@ -166,15 +166,18 @@
         </div>
 
         <!-- Tab Switcher -->
-        <div class="flex p-1 bg-white rounded-xl max-w-md mx-auto mb-8 border border-slate-100">
-            <button onclick="switchTab(1)" id="tab-btn-1" class="flex-1 py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-900 bg-caliRed">
+        <div class="grid grid-cols-2 md:grid-cols-4 p-1 bg-white rounded-xl max-w-2xl mx-auto mb-8 border border-slate-100 gap-1">
+            <button onclick="switchTab(1)" id="tab-btn-1" class="py-2.5 text-sm font-bold rounded-lg tab-transition text-white bg-caliRed">
                 WEEK 1
             </button>
-            <button onclick="switchTab(2)" id="tab-btn-2" class="flex-1 py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-500 hover:text-slate-900">
+            <button onclick="switchTab(2)" id="tab-btn-2" class="py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-500 hover:text-slate-900">
                 WEEK 2
             </button>
-            <button onclick="switchTab(3)" id="tab-btn-3" class="flex-1 py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-500 hover:text-slate-900">
+            <button onclick="switchTab(3)" id="tab-btn-3" class="py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-500 hover:text-slate-900">
                 WEEK 3
+            </button>
+            <button onclick="switchTab(4)" id="tab-btn-4" class="py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-500 hover:text-slate-900">
+                METRICS
             </button>
         </div>
 
@@ -662,10 +665,11 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Dashboard Simulator Quick Tool -->
-        <div class="mt-12 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <!-- SIMULATOR PANEL -->
+            <div id="panel-4" class="space-y-8 hidden">
+                <!-- Dashboard Simulator Quick Tool -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
             <h3 class="text-xl font-extrabold text-slate-900 mb-4 flex items-center gap-2">
                 <i data-lucide="gauge" class="text-caliRed w-6 h-6"></i> 
                 <span class="lang-vi">Trình Mô Phỏng Đo Lường Tương Tác Video (Thực Tập Sinh)</span>
@@ -808,7 +812,9 @@
                     <span class="lang-vi">Lý do dùng mô hình này: các chỉ số Views, Likes, Comments và Shares đều dễ lấy trực tiếp từ Facebook Page/Post. Like là tín hiệu nhẹ; Comment cho thấy người xem tham gia sâu hơn; Share là tín hiệu lan truyền mạnh nhất; Views phản ánh độ phủ nhưng chỉ cộng nhẹ để không làm méo kết quả.</span>
                     <span class="lang-en hidden">Why this model: Views, Likes, Comments, and Shares are easy to collect from Facebook Page/Post insights. Likes are light signals; comments show deeper participation; shares are the strongest distribution signal; views reflect reach but only receive a light contribution to avoid distorting the result.</span>
                 </p>
+                </div>
             </div>
+        </div>
 
     </main>
 
@@ -863,20 +869,22 @@
 
         function switchTab(tabIndex) {
             // Hide all panels
-            document.getElementById('panel-1').classList.add('hidden');
-            document.getElementById('panel-2').classList.add('hidden');
-            document.getElementById('panel-3').classList.add('hidden');
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`panel-${i}`).classList.add('hidden');
+            }
 
             // Reset tab button styles
-            for (let i = 1; i <= 3; i++) {
+            for (let i = 1; i <= 4; i++) {
                 const btn = document.getElementById(`tab-btn-${i}`);
-                btn.className = "flex-1 py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-500 hover:text-slate-900";
+                btn.className = "py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-500 hover:text-slate-900";
             }
 
             // Show active panel & active button style
             document.getElementById(`panel-${tabIndex}`).classList.remove('hidden');
             const activeBtn = document.getElementById(`tab-btn-${tabIndex}`);
-            activeBtn.className = "flex-1 py-2.5 text-sm font-bold rounded-lg tab-transition text-slate-900 bg-caliRed";
+            activeBtn.className = "py-2.5 text-sm font-bold rounded-lg tab-transition text-white bg-caliRed";
+
+            if (tabIndex === 4) calculateMetrics();
         }
 
         // Calculation Logic for Simulated Dashboard
